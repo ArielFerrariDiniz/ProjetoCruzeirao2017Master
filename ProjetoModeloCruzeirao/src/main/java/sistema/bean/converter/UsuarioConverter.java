@@ -14,7 +14,7 @@ import sistema.service.EquipeService;
 public class UsuarioConverter implements Converter{
 
 	EquipeService service = new EquipeService();
-
+/*teste*/
 	@Override
 	public Object getAsObject(FacesContext fc, UIComponent uic, String value) {
 
