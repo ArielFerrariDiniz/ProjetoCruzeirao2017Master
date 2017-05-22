@@ -5,13 +5,19 @@ import java.util.List;
 import javax.persistence.Entity;
 import java.util.Date;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 @SuppressWarnings("serial")
 @Entity
+@NamedQuery(name = "Usuario.pesquisarPorUserName", query = "select u from Usuario u where u.username = :username")
 public class Usuario implements Serializable{
 	
+private static final long serialVersionUID = 6360850095345609468L;
+	
+	public static final String PESQUISAR_POR_USERNAME = "Usuario.pesquisarPorUserName";
 	@Id
-	private String nome;
-	private String senha;
+	private int id;
+	private String username;
+	private String password;
 	private String email;
 	private String rg;
 	private String cpf;
@@ -25,21 +31,51 @@ public class Usuario implements Serializable{
 	private String foto;
 	private String sexo ;
 	private String cref;
+	private String role= "ADMIN";
 	
 	
-	public String getNome() {
-		return nome;
+	
+	
+	
+	public String getRole() {
+		return role;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setRole(String role) {
+		this.role = role;
 	}
 
-	public Usuario()
-	{
+
+public Usuario()
+{
 	
-	}
+}
+
 	
+	public int getId() {
+	return id;
+}
+
+public void setId(int id) {
+	this.id = id;
+}
+
+public String getUsername() {
+	return username;
+}
+
+public void setUsername(String username) {
+	this.username = username;
+}
+
+public String getPassword() {
+	return password;
+}
+
+public void setPassword(String password) {
+	this.password = password;
+}
+
 	public String getEndereco() {
 		return endereco;
 	}
@@ -100,12 +136,7 @@ public class Usuario implements Serializable{
 	}
 	
 	
-	public String getSenha() {
-		return senha;
-	}
-	public void setSenha(String senha) {
-		this.senha = senha;
-	}
+
 	public String getEmail() {
 		return email;
 	}
@@ -130,4 +161,32 @@ public class Usuario implements Serializable{
 	public void setDataNascimento(String dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
+
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (int) (id ^ (id >>> 32));
+		result = prime * result + ((username == null) ? 0 : username.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Usuario other = (Usuario) obj;
+		if (username == null) {
+			if (other.username != null)
+				return false;
+		} else if (!username.equals(other.username))
+			return false;
+		return true;
+	}
+	
 }

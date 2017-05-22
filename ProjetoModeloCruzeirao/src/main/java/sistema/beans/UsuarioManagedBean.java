@@ -2,52 +2,59 @@ package sistema.beans;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
+import sistema.modelos.Campeonato;
 import sistema.modelos.Usuario;
 import sistema.service.UsuarioService;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
+import sistema.primefaces.util.AlertaUtil;
+
 
 @ManagedBean
 @SessionScoped
 public class UsuarioManagedBean implements Serializable {
 	
+	private AlertaUtil msg = new AlertaUtil();
 	private Usuario usuario = new Usuario();
 	private Usuario usuarioRecuperarSenha = new Usuario();
 	private Usuario usuarioEntrar = new Usuario();
-	private Boolean permissao = false;
 	private Usuario usuarioAtual;
 	private UsuarioService service = new UsuarioService();
-	private List<Usuario> usuarios = new ArrayList<Usuario>();
 
 	
 	public String salvar()
 	{
+		usuario.setId(getId());
 		service.salvar(usuario);
 		usuario = new Usuario();
 		return "login";
 	}
 	
+	public int getId() {
+		List<Usuario> lista = service.getUsuarios();
+
+		Usuario u = new Usuario();
+		if (!(lista.isEmpty())) {
+			u = lista.get(lista.size() - 1);
+			return u.getId() +1;
+		}
+
+		else
+			return 1;
+	}
 	public String entrar()
 	{
 		
-		usuarios =service.getUsuarios();
-		for(Usuario aux: usuarios)
-		{
-		
-			if((aux.getNome().equals(usuarioEntrar.getNome()))&&(aux.getSenha().equals(usuarioEntrar.getSenha())))
-			{
-				permissao = true;
-			}
-			
-		}
-		if(permissao==true)
-		return "paginaInicial";
+		usuario =service.entrar(usuarioEntrar);
+	if(usuario.equals(null))
+		return "login";
 		else
-		return "cadastroCampeonato";
+		return "paginaInicial";
 		
 	}
 	
@@ -58,24 +65,11 @@ public class UsuarioManagedBean implements Serializable {
 	
 	public String recuperarSenha()
 	{
-		usuarios=service.getUsuarios();
-		for(Usuario aux : usuarios)
-		{
-			if(aux.getEmail().equals(usuarioRecuperarSenha.getEmail())&& (aux.getCpf().equals(usuarioRecuperarSenha.getCpf())))
-			{
-				permissao = true;
-				usuario = aux;
-			}
-		}
-		if(permissao == true)
-		{
-			return "mostrarSenha";
-		}
+		usuario=service.recuperarSenha(usuarioRecuperarSenha);
+		if(usuario.equals(null))
+			return "login";
 		else
-		{
-		permissao = false;
-		return "login";
-		}
+			return "mostrarSenha";
 	}
 	
 	public Usuario getUsuario() {
@@ -109,4 +103,15 @@ public class UsuarioManagedBean implements Serializable {
 	public void setUsuarioEntrar(Usuario usuarioEntrar) {
 		this.usuarioEntrar = usuarioEntrar;
 	}
+public void preRender(){
+		
+		HttpServletRequest request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
+		
+		if ("true".equals(request.getParameter("error"))) {
+			msg.exibirErroGrowl("Usuário ou senha inválidos");
+		}
+		
+	}
+	
+
 }

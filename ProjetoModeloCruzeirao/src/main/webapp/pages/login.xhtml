@@ -7,6 +7,13 @@
 	xmlns:ui2="http://java.sun.com/jsf/facelets"
 	xmlns:tm="http://java.sun.com/jsf/composite/terminal/1_0/components">
 
+
+
+<f:metadata>
+			<f:event listener="#{usuarioManagedBean.preRender}"
+				type="preRenderView" />
+		  </f:metadata>
+		  
 	<ui:define name="title">
 		<h:outputText value="#{msg['pages.login.title']}" />
 	</ui:define>
@@ -17,21 +24,35 @@
 		<h1>
 			<p:outputLabel value="#{msg['pages.login.menu']}" />
 		</h1>
+<h:body>
+		
+          <div align="center"> 
+            
+            <p:growl id="messages" sticky="false" life="3000"
+						for="mensagemGrowl" autoUpdate="true" />
+						
+ 			<h:form id="login" prependId="false">
+						<p:focus />
+						<h:panelGrid id="panel" style="margin:3%; text-align: center">
 
-		<h:form id="formLogin">
-			<p:panelGrid columns="2">
-				<p:outputLabel value="#{msg['pages.login.nome']}" />
-				<p:inputText value="#{usuarioManagedBean.usuarioEntrar.nome}" />
-				<p:outputLabel value="#{msg['pages.login.senha']}" />
-				<p:inputText value="#{usuarioManagedBean.usuarioEntrar.senha}" />
-			</p:panelGrid>
-			<p:commandButton value="#{msg['pages.login.btnEntrar']}"
-				action="#{usuarioManagedBean.entrar}" />
-			<br />
+							<p:inputText type="text" id="username" autocomplete="off" size="30"
+								maxlength="80" label="Usuário">
+								<p:watermark for="username" value="Usuário" />
+							</p:inputText>
+
+							<p:password  size="30" id="password" value="Senha:" maxlength="20">
+								<p:watermark for="password" value="Senha" />
+							</p:password>
+
+							<p:commandButton value="Login"  ajax="false"  style="width: 50%; max-width: 200px;" />
+						</h:panelGrid>
+						<br />
 
 			<p:link href="cadastroUsuario.xhtml">Cadastre-se /</p:link>
 			<p:link href="recuperarSenha.xhtml"> Recuperar Senha</p:link>
+					</h:form>
+              </div>
 
-		</h:form>
+</h:body>		
 	</ui:define>
 </ui:composition>
