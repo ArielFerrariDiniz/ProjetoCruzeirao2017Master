@@ -1,0 +1,97 @@
+<ui:composition template="templateMenu.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui2="http://java.sun.com/jsf/facelets"
+	xmlns:tm="http://java.sun.com/jsf/composite/terminal/1_0/components">
+
+	<ui:define name="title">
+		<h:outputText value="#{msg['pages.cadastroLocal.title']}" />
+	</ui:define>
+
+	<ui:define name="principal">
+
+		<h1>
+			<p:outputLabel value="#{msg['pages.cadastroLocal.menu']}" />
+		</h1>
+
+		<h:form id="formLocal">
+			<p:panelGrid columns="2">
+
+				<p:outputLabel for="estado"
+					value="#{msg['pages.cadastroLocal.estado']}" />
+				<p:inputText id="estado" value="#{localManagedBean.local.estado}"
+					required="true" requiredMessage="#{msg['pages.validator.estado']}" />
+
+				<h:outputLabel for="municipio"
+					value="#{msg['pages.cadastroLocal.municipio']}" />
+				<p:inputText id="municipio"
+					value="#{localManagedBean.local.municipio}" required="true"
+					requiredMessage="#{msg['pages.validator.municipio']}" />
+
+				<h:outputLabel for="bairro"
+					value="#{msg['pages.cadastroLocal.bairro']}" />
+				<p:inputText id="bairro" value="#{localManagedBean.local.bairro}"
+					required="true" requiredMessage="#{msg['pages.validator.bairro']}" />
+
+				<h:outputLabel for="endereco"
+					value="#{msg['pages.cadastroLocal.endereco']}" />
+				<p:inputText id="endereco"
+					value="#{localManagedBean.local.endereco}" required="true"
+					requiredMessage="#{msg['pages.validator.endereco']}" />
+
+				<h:outputLabel for="numero"
+					value="#{msg['pages.cadastroLocal.numero']}" />
+				<p:inputText id="numero" value="#{localManagedBean.local.numero}"
+					required="true" requiredMessage="#{msg['pages.validator.numero']}" />
+
+			</p:panelGrid>
+
+			<p:message for="estado" style="color:red" />
+			<p:message for="municipio" style="color:red" />
+			<p:message for="bairro" style="color:red" />
+			<p:message for="endereco" style="color:red" />
+			<p:message for="numero" style="color:red" />
+
+			<p:commandButton value="#{msg['pages.cadastroLocal.btnSalvar']}"
+				action="#{localManagedBean.salvar}" update=":formLocal, value" />
+		</h:form>
+
+		<h:form id="value">
+			<p:growl id="msg" showDetail="true" />
+			<p:dialog header="Values" resizable="false" showEffect="fade"
+				widgetVar="dlg">
+				<p:panelGrid id="output" columns="2" columnClasses="label, value">
+
+					<p:outputLabel value="#{msg['pages.cadastroLocal.estado']}" />
+					<p:outputLabel value="#{localManagedBean.localAtual.estado}" />
+
+					<p:outputLabel value="#{msg['pages.cadastroLocal.municipio']}" />
+					<p:outputLabel value="#{localManagedBean.localAtual.municipio}" />
+
+					<p:outputLabel value="#{msg['pages.cadastroLocal.bairro']}" />
+					<p:outputLabel value="#{localManagedBean.localAtual.bairro}" />
+
+					<p:outputLabel value="#{msg['pages.cadastroLocal.endereco']}" />
+					<p:outputLabel value="#{localManagedBean.localAtual.endereco}" />
+
+					<p:outputLabel value="#{msg['pages.cadastroLocal.numero']}" />
+					<p:outputLabel value="#{localManagedBean.localAtual.numero}" />
+
+				</p:panelGrid>
+
+				<p:commandButton value="Yes" action="#{localManagedBean.ir}"
+					update="value, msg" />
+				<p:commandButton value="No" action="#{localManagedBean.no}"
+					update="value, msg" />
+
+			</p:dialog>
+
+		</h:form>
+
+		<br />
+
+	</ui:define>
+</ui:composition>

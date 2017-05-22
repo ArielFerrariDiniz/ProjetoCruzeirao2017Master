@@ -5,6 +5,7 @@
 		<class>sistema.modelos.Categoria</class>
 		<class>sistema.modelos.Usuario</class>
 		<class>sistema.modelos.Equipe</class>
+		<class>sistema.modelos.Local</class>
 		<properties>
 			<property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/sample;create=true"/>
 			<property name="javax.persistence.jdbc.user" value="user"/>
