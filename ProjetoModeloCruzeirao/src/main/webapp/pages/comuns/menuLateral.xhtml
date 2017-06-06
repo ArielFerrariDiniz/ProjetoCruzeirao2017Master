@@ -11,8 +11,9 @@
 				<p:menuitem value="#{msg['pages.inicio.menu']}" url="inicio.xhtml" />
 				<p:menuitem value="#{msg['pages.login.menu']}" url="login.xhtml" />
 			</p:submenu>
+		
 
-			<p:submenu label="#{msg['pages.comuns.menuLateral.gerenciamento']}">
+			<p:submenu label="#{msg['pages.comuns.menuLateral.gerenciamento']}" rendered="#{request.isUserInRole('ADMIN')}">
 			
 				<p:submenu label="#{msg['pages.cadastroCampeonato.menu']}">
 					<p:menuitem value="#{msg['pages.cadastroCampeonato.cadastrar']}" url="cadastroCampeonato.xhtml"/>
@@ -20,19 +21,19 @@
 				    <p:menuitem value="#{msg['pages.cadastroCampeonato.ver']}" url="cadastroCampeonatoVerUsuario.xhtml"/>
 				</p:submenu>
 				
-				<p:submenu label="#{msg['pages.cadastroCategoria.menu']}">
+				<p:submenu label="#{msg['pages.cadastroCategoria.menu']}" rendered="#{request.isUserInRole('ADMIN')}">
 					<p:menuitem value="#{msg['pages.cadastroCategoria.cadastrar']}" url="cadastroCategoria.xhtml" />
 					<p:menuitem value="#{msg['pages.cadastroCategoria.ver']}" url="cadastroCategoriaVer.xhtml"/>
 				    <p:menuitem value="#{msg['pages.cadastroCategoria.ver']}" url="cadastroCategoriaVerUsuario.xhtml"/>
 				</p:submenu>
 
-                <p:submenu label="#{msg['pages.cadastroEquipe.menu']}">
+                <p:submenu label="#{msg['pages.cadastroEquipe.menu']}" rendered="#{request.isUserInRole('ADMIN')}">
 				    <p:menuitem value="#{msg['pages.cadastroEquipe.cadastrar']}" url="cadastroEquipe.xhtml" />
 				</p:submenu>
 				
 			</p:submenu>
 
-			<p:submenu label="#{msg['pages.comuns.menuLateral.chaves']}">
+			<p:submenu label="#{msg['pages.comuns.menuLateral.chaves']}" rendered="#{request.isUserInRole('ADMIN')}">
 				<p:menuitem value="#{msg['pages.criarChaves.menu']}"
 					url="criarChaves.xhtml" />
 				<p:menuitem value="#{msg['pages.verChaves.menu']}"
