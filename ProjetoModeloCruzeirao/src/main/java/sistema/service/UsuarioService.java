@@ -51,6 +51,32 @@ public class UsuarioService extends Service {
 		return null;
 		
 	}
+	
+	public Usuario definirADM(Usuario usuario)
+	{
+		List<Usuario> usuarios;
+
+		EntityManager em = emf.createEntityManager();
+		Query q = em.createQuery("Select u From Usuario u ");
+		usuarios = q.getResultList();
+
+		for(Usuario aux : usuarios)
+		{
+			if(aux.getEmail().equals(usuario.getEmail())&& (aux.getCpf().equals(usuario.getCpf())))
+			{
+				
+			
+				aux.setRole("ADMIN");
+				em.getTransaction().begin();
+				em.merge(aux);
+				em.getTransaction().commit();
+				em.close();
+				return aux;
+			}
+		}
+		return null;
+		
+	}
 
 	
 	@SuppressWarnings("unchecked")

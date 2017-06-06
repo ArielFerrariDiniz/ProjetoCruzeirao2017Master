@@ -58,11 +58,25 @@ public class UsuarioManagedBean implements Serializable {
 		
 	}
 	
+	public String definirADM()
+	{
+		usuario=service.definirADM(usuarioRecuperarSenha);
+		if(usuario.equals(null))
+			return "definirADM";
+		else
+			return "confirmarNovoADM";
+	}
+	
 	public String voltar()
 	{
 		return "login";
 	}
 	
+
+	public String voltar2()
+	{
+		return "login";
+	}
 	public String recuperarSenha()
 	{
 		usuario=service.recuperarSenha(usuarioRecuperarSenha);

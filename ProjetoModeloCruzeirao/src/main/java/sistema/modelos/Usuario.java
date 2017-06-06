@@ -24,7 +24,7 @@ private static final long serialVersionUID = 6360850095345609468L;
 	private String email;
 	private String rg;
 	private String cpf;
-	private String dataNascimento;
+	private Date dataNascimento;
 	private String endereco;
 	private String telefoneFixo;
 	private String telefoneMovel;
@@ -35,7 +35,7 @@ private static final long serialVersionUID = 6360850095345609468L;
 	private String foto;
 	private String sexo ;
 	private String cref;
-	private String role= "ADMIN";
+	private String role= "COMUM";
 	
 	
 	
@@ -159,13 +159,16 @@ public void setPassword(String password) {
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
-	public String getDataNascimento() {
+
+
+
+	public Date getDataNascimento() {
 		return dataNascimento;
 	}
-	public void setDataNascimento(String dataNascimento) {
+
+	public void setDataNascimento(Date dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
-
 
 	@Override
 	public int hashCode() {

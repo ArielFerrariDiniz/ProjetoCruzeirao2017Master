@@ -50,6 +50,11 @@
 					url="verLocais.xhtml" />
 			</p:submenu>
 
+<p:submenu label="#{msg['pages.comuns.menuLateral.definirADM']}" rendered="#{request.isUserInRole('ADMIN')}">
+				<p:menuitem value="#{msg['pages.definirADM.menu']}"
+					url="definirADM.xhtml" />
+			</p:submenu>
+			
 			<p:submenu label="#{msg['pages.comuns.menuLateral.options']}">
 				<p:menuitem value="#{msg['pages.linguagem.menu']}"
 					url="linguagem.xhtml" />

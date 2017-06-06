@@ -31,8 +31,12 @@
 				<p:inputText value="#{usuarioManagedBean.usuario.rg}" />
 				<p:outputLabel value="#{msg['pages.cadastroUsuario.cpf']}" />
 				<p:inputText value="#{usuarioManagedBean.usuario.cpf}" />
-				<p:outputLabel value="#{msg['pages.cadastroUsuario.dataNascimento']}" />
-				<p:inputText value="#{usuarioManagedBean.usuario.dataNascimento}" />
+				<p:outputLabel for="button"
+					value="#{msg['pages.cadastroUsuario.dataNascimento']}" />
+				<p:calendar id="button"
+					value="#{usuarioManagedBean.usuario.dataNascimento}"
+					showOn="button" pattern="dd-MM-yyyy" required="true"
+					requiredMessage="#{msg['pages.validator.inicioCam']}" />
 			</p:panelGrid>
 			<p:commandButton value="#{msg['pages.cadastroUsuario.btnSalvar']}"
 				action="#{usuarioManagedBean.salvar}" />
