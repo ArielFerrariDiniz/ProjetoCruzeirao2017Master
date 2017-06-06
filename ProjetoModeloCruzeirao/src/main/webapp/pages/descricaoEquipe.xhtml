@@ -19,14 +19,14 @@
 
 		<p:panelGrid columns="2">
 			<p:outputLabel value="#{msg['pages.cadastroEquipe.nome']}" />
-			<p:outputLabel value="#{EquipeManagedBean.equipeAtual.nome}" />
+			<p:outputLabel value="#{equipeManagedBean.equipeAtual.nome}" />
 			<p:outputLabel value="#{msg['pages.cadastroEquipe.dataFundacao']}" />
-			<p:outputLabel value="#{EquipeManagedBean.equipeAtual.dataFundacao}" />
+			<p:outputLabel value="#{equipeManagedBean.equipeAtual.dataFundacao}" />
 			<p:outputLabel value="#{msg['pages.cadastroEquipe.cidade']}" />
-			<p:outputLabel value="#{EquipeManagedBean.equipeAtual.cidade}" />
+			<p:outputLabel value="#{equipeManagedBean.equipeAtual.cidade}" />
 			<p:outputLabel value="#{msg['pages.cadastroEquipe.diretor']}" />
-			<p:outputLabel value="#{EquipeManagedBean.equipeAtual.diretor}"
-							converter="usuarioConverter" />
+			<p:outputLabel value="#{equipeManagedBean.equipeAtual.diretor.nome}"
+							 />
 		</p:panelGrid>
 		
 		<p:commandButton value="#{msg['pages.cadastroEquipe.btnVoltar']}"

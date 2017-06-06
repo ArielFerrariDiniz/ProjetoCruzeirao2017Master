@@ -8,8 +8,11 @@ import javax.faces.bean.SessionScoped;
 
 import sistema.modelos.Campeonato;
 import sistema.modelos.Equipe;
+import sistema.modelos.Inscricao;
 import sistema.modelos.Equipe;
 import sistema.service.EquipeService;
+import sistema.beans.InscricaoManagedBean;
+
 
 @ManagedBean
 @SessionScoped
@@ -28,11 +31,7 @@ public class EquipeManagedBean implements Serializable{
 		equipe = new Equipe(codigoEquipe);	
 	}
 	
-	public String salvarEditar()
-	{
-		return "cadastroEquipe";
-	}
-
+	
 	public Equipe getEquipe() {
 		return equipe;
 	}
@@ -50,6 +49,7 @@ public class EquipeManagedBean implements Serializable{
 		this.equipeAtual = equipe;
 		return "descricaoEquipe";
 	}
+	
 	
 	public String editarEquipe(Equipe equipe)
 	{
@@ -93,6 +93,12 @@ public class EquipeManagedBean implements Serializable{
 
 		else
 			return 1;
+	}
+	
+	public String salvarEditar() {
+		service.alterarEquipe(equipeAtual);
+		equipeAtual = null;
+		return "cadastroEquipe";
 	}
 	
 }

@@ -1,20 +1,58 @@
 package sistema.modelos;
 
-public class Inscrito {
+import java.io.Serializable;
 
-	private Enum tipo;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+@SuppressWarnings("serial")
+@Entity
+public class Inscrito implements Serializable{
+
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private int id;
+	private String nomeUser;
+	@ManyToOne
+	@JoinColumn(name="idUsuario")
 	private Usuario usuario;
+	
+	@ManyToOne
+	@JoinColumn(name="idInscricao")
 	private Inscricao inscricao;
 	private boolean aceiteUsuario;
 	private boolean suspensoJogos;
 	private boolean inscricaoValidada;
 	
 	
-	public Enum getTipo() {
-		return tipo;
+	public Inscrito(Usuario usuario, Inscricao inscricao){
+		this.usuario=usuario;
+		this.inscricao=inscricao;
 	}
-	public void setTipo(Enum tipo) {
-		this.tipo = tipo;
+	
+	public Inscrito(){
+		
+	}
+	
+	public String getNomeUser() {
+		return nomeUser;
+	}
+
+	public void setNomeUser(String nomeUser) {
+		this.nomeUser = nomeUser;
+	}
+
+	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
 	}
 	public Usuario getUsuario() {
 		return usuario;
@@ -47,5 +85,37 @@ public class Inscrito {
 		this.inscricaoValidada = inscricaoValidada;
 	}
 	
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((nomeUser == null) ? 0 : nomeUser.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Inscrito other = (Inscrito) obj;
+		if (nomeUser == null) {
+			if (other.nomeUser != null)
+				return false;
+		} else if (!nomeUser.equals(other.nomeUser))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Inscrito [nomeUser=" + nomeUser + ", usuario=" + usuario + ", inscricao=" + inscricao
+				+ ", aceiteUsuario=" + aceiteUsuario + ", suspensoJogos=" + suspensoJogos + ", inscricaoValidada="
+				+ inscricaoValidada + "]";
+	}
 	
 }

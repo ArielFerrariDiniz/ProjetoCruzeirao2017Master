@@ -16,21 +16,73 @@
 		<h1>
 			<p:outputLabel value="#{msg['pages.validacoes.menu']}" />
 		</h1>
+		
+		
+			<h:form id = "formInscricoes"> 
+			<p:dataTable value="#{inscricaoManagedBean.inscricoes}" var="aux" rowKey="#{aux.numero}"
+			id="inscricoes" selectionMode="single"
+			selection="#{inscricaoManagedBean.inscricaoAtual}"
+				>
+			<p:column headerText="#{msg['pages.inscricao.id']}">
+				<p:outputLabel value="#{aux.numero}" />
+			</p:column>
+			<p:column headerText="#{msg['pages.inscricao.nomeEquipe']}">
+				<p:outputLabel value="#{aux.equipe.nome}" />
+			</p:column>
+			<p:column headerText="#{msg['pages.cadastroEquipe.descricao']}">
+				<p:commandButton update=":timeDetail" oncomplete="PF('dlg1').show()" icon="ui-icon-search" title="View">
+                	<f:setPropertyActionListener value="#{aux}" target="#{inscricaoManagedBean.inscricaoAtual}" />
+            	</p:commandButton>
+			</p:column>
+				
+			
+			<p:column headerText="#{msg['pages.inscricao.validada']}">
+				     <p:selectBooleanCheckbox value="#{aux.validada}" />
+				    <p:commandButton update="" action="#{inscricaoManagedBean.validarInscricao(aux)}" icon="ui-icon-check" title="View">
+                </p:commandButton>
+			</p:column>
+			
+			<p:column headerText="#{msg['pages.inscricao.pagamento']}">
+				<p:selectBooleanCheckbox value="#{aux.pagamento}" />
+				 <p:commandButton update="" action="#{inscricaoManagedBean.validarPagamento(aux)}" icon="ui-icon-check" title="View">
+                </p:commandButton>
+			</p:column>
+			 
+			
 
-		<h:form id="formValidar">
-			<p:panelGrid columns="2">
-				<p:outputLabel value="Time A" />
-				<p:selectBooleanCheckbox value="#{selectBooleanView.value1}" />
-				<p:outputLabel value="Time B" />
-				<p:selectBooleanCheckbox value="#{selectBooleanView.value1}" />
-				<p:outputLabel value="Time C" />
-				<p:selectBooleanCheckbox value="#{selectBooleanView.value1}" />
-				<p:outputLabel value="Time D" />
-				<p:selectBooleanCheckbox value="#{selectBooleanView.value1}" />
-			</p:panelGrid>
-			<p:commandButton value="#{msg['pages.validacoes.btnAccept']}"
-				action="#{validacaoManagedBean.salvar}" />
+		</p:dataTable>
 		</h:form>
+		<p:commandButton value="#{msg['pages.cadastroEquipe.btnSalvar']}"
+				 update=":formInscricoes" />
+		
+		
+		<p:dialog header="timeDetail"  widgetVar="dlg1" minHeight="40">
+        <p:outputPanel id="timeDetail" style="text-align:center;">
+            <p:panelGrid  columns="2" rendered="#{not empty inscricaoManagedBean.inscricaoAtual}" columnClasses="label,value">
+                
+             <p:outputLabel value="#{msg['pages.inscricao.id']}" />
+			<p:outputLabel value="#{inscricaoManagedBean.inscricaoAtual.numero}" />
+			<p:outputLabel value="#{msg['pages.inscricao.categoria']}" />
+			<p:outputLabel value="#{inscricaoManagedBean.inscricaoAtual.categoria.nome}" />
+			<p:outputLabel value="#{msg['pages.inscricao.nomeEquipe']}" />
+			<p:outputLabel value="#{inscricaoManagedBean.inscricaoAtual.equipe.nome}" />
+			<p:outputLabel value="#{msg['pages.inscricao.pagamento']}" />
+			<p:outputLabel value="#{inscricaoManagedBean.inscricaoAtual.pagamento}"/>
+			<p:outputLabel value="#{msg['pages.inscricao.validada']}" />
+			<p:outputLabel value="#{inscricaoManagedBean.inscricaoAtual.validada}"/>
+			<p:outputLabel value="#{msg['pages.inscricao.jogadores']}" />
+			<p:dataList value="#{inscricaoManagedBean.inscricaoAtual.inscritos}" var="inscrito" type="ordered">
+       		 <f:facet name="header">
+     	       Players
+     		   </f:facet>
+      		  #{inscrito.nomeUser}
+  			  </p:dataList>
+            </p:panelGrid>
+        </p:outputPanel>
+    </p:dialog>
+   
+		
+	
 
 	</ui:define>
 </ui:composition>

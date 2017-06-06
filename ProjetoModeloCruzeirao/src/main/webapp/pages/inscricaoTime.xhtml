@@ -19,13 +19,49 @@
 
 		<h:form id="formInscricao">
 			<p:panelGrid columns="2">
-				<p:outputLabel value="#{msg['pages.inscricao.quantidade']}" />
-				<p:outputLabel value="300" />
+			<p:outputLabel value="#{msg['pages.inscricao.campeonato']}" />
+			<p:selectOneMenu  value="#{inscricaoManagedBean.campeonatoCategoria}"
+					converter="campeonatoConverter"  >
+					 <p:ajax update="seletorCategoria" />
+					<f:selectItem itemValue=""
+						itemLabel="#{msg['pages.inscricao.campeonato']}" />
+					<f:selectItems value="#{inscricaoManagedBean.campeonatos}"
+						var="cmp" itemValue="#{cmp}" itemLabel="#{cmp.nomeCampeonato}" />
+				</p:selectOneMenu>
+				<p:outputLabel value="#{msg['pages.inscricao.categoria']}" for="seletorCategoria" />
+			<p:selectOneMenu id="seletorCategoria" value="#{inscricaoManagedBean.categoriaInscricao}"
+					converter="categoriaConverter"   >
+					<f:selectItem itemValue=""
+						itemLabel="#{msg['pages.inscricao.categoria']}" />
+					<f:selectItems value="#{inscricaoManagedBean.campeonatoCategoria.categorias}"
+						var="cmp" itemValue="#{cmp}" itemLabel="#{cmp.nome}" />
+				</p:selectOneMenu>
+				<p:outputLabel value="#{msg['pages.inscricao.selecionarJogadores']}" />
+	<p:dataTable id="checkboxDT" var="usuario" value="#{usuarioManagedBean.usuarios}" selection="#{inscricaoManagedBean.inscritosSelecionados}" rowKey="#{usuario.username}" style="margin-bottom:0">
+        <f:facet name="header">
+            Players
+        </f:facet>
+        <p:column selectionMode="multiple" style="width:16px;text-align:center"/>
+        <p:column headerText="Nome">
+            <h:outputText value="#{usuario.username}" />
+        </p:column>
+        <p:column headerText="Data Nascimento">
+            <h:outputText value="#{usuario.dataNascimento}" />
+        </p:column>
+        <p:column headerText="Sexo">
+            <h:outputText value="#{usuario.sexo}" />
+        </p:column>
+ 
+   
+    </p:dataTable>
+				
 			</p:panelGrid>
+			
 
-			<p:commandButton value="#{msg['pages.inscricao.botao']}" />
-			<p:commandButton value="#{msg['pages.cadastroCampeonato.btnVoltar']}"
-				action="#{timeManagedBean.voltar}"/>
+			<p:commandButton value="#{msg['pages.inscricao.botao']}" id="salvar" 
+						action="#{inscricaoManagedBean.salvar}"/>
+			 <p:commandButton value="#{msg['pages.cadastroCampeonato.btnVoltar']}"
+				action="#{inscricaoManagedBean.voltar}"/>
 			
 		</h:form>
 	</ui:define>

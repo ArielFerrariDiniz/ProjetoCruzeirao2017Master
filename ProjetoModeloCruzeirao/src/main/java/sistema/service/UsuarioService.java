@@ -94,5 +94,13 @@ public class UsuarioService extends Service {
 		return null;
 	}
 	
+	public void alterarUsuario(Usuario usuario) {
+
+		EntityManager em = emf.createEntityManager();
+		em.getTransaction().begin();
+		em.merge(usuario);
+		em.getTransaction().commit();
+		em.close();
+	}
 	
 }

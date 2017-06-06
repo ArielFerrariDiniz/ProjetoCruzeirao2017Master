@@ -2,10 +2,13 @@ package sistema.modelos;
 
 import java.io.Serializable;
 import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import java.util.Date;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 @SuppressWarnings("serial")
 @Entity
 @NamedQuery(name = "Usuario.pesquisarPorUserName", query = "select u from Usuario u where u.username = :username")
@@ -26,6 +29,7 @@ private static final long serialVersionUID = 6360850095345609468L;
 	private String telefoneFixo;
 	private String telefoneMovel;
 	private List <Campeonato> campeonatos;
+	@OneToMany(cascade=CascadeType.ALL, mappedBy="usuario")
 	private List <Inscrito> incricoes;
 	private List <Equipe> equipes;
 	private String foto;
@@ -103,8 +107,8 @@ public void setPassword(String password) {
 	public List<Inscrito> getIncricoes() {
 		return incricoes;
 	}
-	public void setIncricoes(List<Inscrito> incricoes) {
-		this.incricoes = incricoes;
+	public void setIncricoes(Inscrito inscrito) {
+		this.incricoes.add(inscrito);
 	}
 	public List<Equipe> getEquipes() {
 		return equipes;

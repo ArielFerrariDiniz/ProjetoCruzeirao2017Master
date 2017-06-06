@@ -48,17 +48,26 @@
 				<p:outputLabel value="#{aux.nome}" />
 			</p:column>
 			<p:column headerText="#{msg['pages.cadastroEquipe.descricao']}">
-					<p:commandLink  action="#{equipeManagedBean.descricaoEquipe(aux)}" value="Descricao / Description"> </p:commandLink>
+					
+					<p:commandButton update="" action="#{equipeManagedBean.descricaoEquipe(aux)}" icon="ui-icon-search" title="Description">
+                </p:commandButton>
+               
+				
 				</p:column>
 				
 			<p:column headerText="#{msg['pages.inscricao.title1']}">
-				<p:link href="inscricaoTime.xhtml">Finalizar Inscrição</p:link>
+				
+				<p:commandButton update="" action="#{inscricaoManagedBean.finalizarInscricao(aux)}" icon="ui-icon-circle-arrow-e" title="Resume">
+                </p:commandButton>
 			</p:column>
 			
 			
 			<p:column headerText="#{msg['pages.cadastroEquipe.opcoes']}">
-					<p:commandLink  action="#{equipeManagedBean.editarEquipe(aux)}" value="Editar / Edit " update=":formTabelaTime"> </p:commandLink>
-			    	<p:commandLink  action="#{equipeManagedBean.removerEquipe(aux)}" value="Excluir / Delete" update=":formTabelaTime"> </p:commandLink>
+			 <p:commandButton update="" action="#{equipeManagedBean.editarEquipe(aux)}" icon="ui-icon-pencil" title="Edit">
+                </p:commandButton>
+                 <p:commandButton update="formTabelaTime" action="#{equipeManagedBean.removerEquipe(aux)}" icon="ui-icon-trash" title="Remove">
+                </p:commandButton>
+				
 				</p:column>
 
 		</p:dataTable>
